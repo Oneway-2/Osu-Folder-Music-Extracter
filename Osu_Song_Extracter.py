@@ -16,15 +16,15 @@ def Ask_Directory(self):
     return dirName
 
 def Activate_Extract_Button_Condition_Check(self):
-    print("체크중")
+    # print("체크중")
     if self.songs_location != "" and self.extract_location != "":
         self.extract_start_btn.config(state = 'active')
         Count_Folders(self)  # 폴더 개수 세고, instruction label에 설명 해주기.
-        print("버튼활성화")
+        # print("버튼활성화")
     else:
         self.extract_start_btn.config(state = 'disabled')
         self.instruction.config(text = "안내: Songs 경로와 노래가 저장될 경로를 선택해주세요.") 
-        print("버튼비활성화")
+        # print("버튼비활성화")
 
 
 class SampleApp(tk.Tk):
@@ -59,7 +59,7 @@ class StartPage(tk.Frame):
         Activate_Extract_Button_Condition_Check(self)
 
     def Extract_Start(self):
-        print("시작")
+        print("시작\n")
         folder_list = Read_Files(self, self.songs_location) 
 
         for i in folder_list:
@@ -117,7 +117,7 @@ class StartPage(tk.Frame):
                         os.remove(new_file_directory)
                         shutil.copy2(the_file_to_be_copied_location, self.extract_location) # 카피 실행
                         os.rename(old_file_directory, new_file_directory) # 이름변경 실행
-                        print("이미 있는 녀석이지만 큰 용량의 것을 가져왔다.")
+                        print("이미 있는 녀석이지만 큰 용량의 것을 가져왔다.\n")
                     else:
                         print("이미 동일한 파일이 있으니 복사도 안하고 이름도 안바꿈.\n")
                         continue
@@ -126,13 +126,12 @@ class StartPage(tk.Frame):
                     # print(the_file_to_be_copied_location + "파일을" + self.extract_location + "로 카피했습니다.")
                     os.rename(old_file_directory, new_file_directory) # 이름변경 실행
                     # print("새로운 파일의 이름은 " + new_file_name + " 입니다.")
-                print("\n")
             except NotADirectoryError:
                 print(i)
                 print("이 친구는 폴더가 아니라 그냥 파일이네.\n")
                 continue
 
-        print("복사 완료")
+        print("복사 완료\n")
 
     def __init__(self, master):  
         tk.Frame.__init__(self, master)
